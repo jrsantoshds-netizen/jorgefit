@@ -1,8 +1,11 @@
 import Link from 'next/link';
-import { MOCK_STUDENTS } from '@/lib/data';
 import { HeartPulse, User, ArrowLeft } from 'lucide-react';
+import { getStudents } from '../actions';
 
-export default function AlunoLoginMock() {
+export const dynamic = 'force-dynamic';
+
+export default async function AlunoLoginMock() {
+  const students = await getStudents();
   return (
     <div 
       className="min-h-screen flex flex-col items-center justify-center bg-slate-900 font-sans p-4 relative overflow-hidden bg-cover bg-center bg-no-repeat"
@@ -32,7 +35,7 @@ export default function AlunoLoginMock() {
           </p>
 
           <div className="space-y-4">
-            {MOCK_STUDENTS.map(student => (
+            {students.map(student => (
               <Link 
                 key={student.id} 
                 href={`/aluno/${student.id}`}
